@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Booking Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Explore & Book Your Next Trip</h1>
+    <nav>
+      <ul>
+        <li><a href="#">Flights</a></li>
+        <li><a href="#">Hotels</a></li>
+        <li><a href="#">Packages</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="search-section">
+      <h2>Search Your Travel</h2>
+      <form id="searchForm">
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+
+        <label for="category">Category:</label>
+        <select id="category">
+          <option value="flights">Flights</option>
+          <option value="hotels">Hotels</option>
+          <option value="packages">Holiday Packages</option>
+        </select>
+
+        <button type="submit">Search</button>
+      </form>
+    </section>
+
+    <section id="results" class="results-section">
+      <!-- Results will be displayed here -->
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 TravelBooking Co. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
