@@ -1,140 +1,62 @@
-# accepts
+# call-bind-apply-helpers <sup>[![Version Badge][npm-version-svg]][package-url]</sup>
 
-[![NPM Version][npm-version-image]][npm-url]
-[![NPM Downloads][npm-downloads-image]][npm-url]
-[![Node.js Version][node-version-image]][node-version-url]
-[![Build Status][github-actions-ci-image]][github-actions-ci-url]
-[![Test Coverage][coveralls-image]][coveralls-url]
+[![github actions][actions-image]][actions-url]
+[![coverage][codecov-image]][codecov-url]
+[![dependency status][deps-svg]][deps-url]
+[![dev dependency status][dev-deps-svg]][dev-deps-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
 
-Higher level content negotiation based on [negotiator](https://www.npmjs.com/package/negotiator).
-Extracted from [koa](https://www.npmjs.com/package/koa) for general use.
+[![npm badge][npm-badge-png]][package-url]
 
-In addition to negotiator, it allows:
+Helper functions around Function call/apply/bind, for use in `call-bind`.
 
-- Allows types as an array or arguments list, ie `(['text/html', 'application/json'])`
-  as well as `('text/html', 'application/json')`.
-- Allows type shorthands such as `json`.
-- Returns `false` when no types match
-- Treats non-existent headers as `*`
+The only packages that should likely ever use this package directly are `call-bind` and `get-intrinsic`.
+Please use `call-bind` unless you have a very good reason not to.
 
-## Installation
-
-This is a [Node.js](https://nodejs.org/en/) module available through the
-[npm registry](https://www.npmjs.com/). Installation is done using the
-[`npm install` command](https://docs.npmjs.com/getting-started/installing-npm-packages-locally):
+## Getting started
 
 ```sh
-$ npm install accepts
+npm install --save call-bind-apply-helpers
 ```
 
-## API
+## Usage/Examples
 
 ```js
-var accepts = require('accepts')
-```
+const assert = require('assert');
+const callBindBasic = require('call-bind-apply-helpers');
 
-### accepts(req)
-
-Create a new `Accepts` object for the given `req`.
-
-#### .charset(charsets)
-
-Return the first accepted charset. If nothing in `charsets` is accepted,
-then `false` is returned.
-
-#### .charsets()
-
-Return the charsets that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .encoding(encodings)
-
-Return the first accepted encoding. If nothing in `encodings` is accepted,
-then `false` is returned.
-
-#### .encodings()
-
-Return the encodings that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .language(languages)
-
-Return the first accepted language. If nothing in `languages` is accepted,
-then `false` is returned.
-
-#### .languages()
-
-Return the languages that the request accepts, in the order of the client's
-preference (most preferred first).
-
-#### .type(types)
-
-Return the first accepted type (and it is returned as the same text as what
-appears in the `types` array). If nothing in `types` is accepted, then `false`
-is returned.
-
-The `types` array can contain full MIME types or file extensions. Any value
-that is not a full MIME type is passed to `require('mime-types').lookup`.
-
-#### .types()
-
-Return the types that the request accepts, in the order of the client's
-preference (most preferred first).
-
-## Examples
-
-### Simple type negotiation
-
-This simple example shows how to use `accepts` to return a different typed
-respond body based on what the client wants to accept. The server lists it's
-preferences in order and will get back the best match between the client and
-server.
-
-```js
-var accepts = require('accepts')
-var http = require('http')
-
-function app (req, res) {
-  var accept = accepts(req)
-
-  // the order of this list is significant; should be server preferred order
-  switch (accept.type(['json', 'html'])) {
-    case 'json':
-      res.setHeader('Content-Type', 'application/json')
-      res.write('{"hello":"world!"}')
-      break
-    case 'html':
-      res.setHeader('Content-Type', 'text/html')
-      res.write('<b>hello, world!</b>')
-      break
-    default:
-      // the fallback is text/plain, so no need to specify it above
-      res.setHeader('Content-Type', 'text/plain')
-      res.write('hello, world!')
-      break
-  }
-
-  res.end()
+function f(a, b) {
+	assert.equal(this, 1);
+	assert.equal(a, 2);
+	assert.equal(b, 3);
+	assert.equal(arguments.length, 2);
 }
 
-http.createServer(app).listen(3000)
+const fBound = callBindBasic([f, 1]);
+
+delete Function.prototype.call;
+delete Function.prototype.bind;
+
+fBound(2, 3);
 ```
 
-You can test this out with the cURL program:
-```sh
-curl -I -H'Accept: text/html' http://localhost:3000/
-```
+## Tests
 
-## License
+Clone the repo, `npm install`, and run `npm test`
 
-[MIT](LICENSE)
-
-[coveralls-image]: https://badgen.net/coveralls/c/github/jshttp/accepts/master
-[coveralls-url]: https://coveralls.io/r/jshttp/accepts?branch=master
-[github-actions-ci-image]: https://badgen.net/github/checks/jshttp/accepts/master?label=ci
-[github-actions-ci-url]: https://github.com/jshttp/accepts/actions/workflows/ci.yml
-[node-version-image]: https://badgen.net/npm/node/accepts
-[node-version-url]: https://nodejs.org/en/download
-[npm-downloads-image]: https://badgen.net/npm/dm/accepts
-[npm-url]: https://npmjs.org/package/accepts
-[npm-version-image]: https://badgen.net/npm/v/accepts
+[package-url]: https://npmjs.org/package/call-bind-apply-helpers
+[npm-version-svg]: https://versionbadg.es/ljharb/call-bind-apply-helpers.svg
+[deps-svg]: https://david-dm.org/ljharb/call-bind-apply-helpers.svg
+[deps-url]: https://david-dm.org/ljharb/call-bind-apply-helpers
+[dev-deps-svg]: https://david-dm.org/ljharb/call-bind-apply-helpers/dev-status.svg
+[dev-deps-url]: https://david-dm.org/ljharb/call-bind-apply-helpers#info=devDependencies
+[npm-badge-png]: https://nodei.co/npm/call-bind-apply-helpers.png?downloads=true&stars=true
+[license-image]: https://img.shields.io/npm/l/call-bind-apply-helpers.svg
+[license-url]: LICENSE
+[downloads-image]: https://img.shields.io/npm/dm/call-bind-apply-helpers.svg
+[downloads-url]: https://npm-stat.com/charts.html?package=call-bind-apply-helpers
+[codecov-image]: https://codecov.io/gh/ljharb/call-bind-apply-helpers/branch/main/graphs/badge.svg
+[codecov-url]: https://app.codecov.io/gh/ljharb/call-bind-apply-helpers/
+[actions-image]: https://img.shields.io/endpoint?url=https://github-actions-badge-u3jn4tfpocch.runkit.sh/ljharb/call-bind-apply-helpers
+[actions-url]: https://github.com/ljharb/call-bind-apply-helpers/actions
