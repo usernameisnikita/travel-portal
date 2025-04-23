@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel Booking Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f8ff;
+    }
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #023e8a;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 2rem;
+    }
+    .search-form input,
+    .search-form select,
+    .search-form button {
+      padding: 0.5rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    footer {
+      background-color: #0077b6;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Travel Booking Portal</h1>
+    <p>Find Flights, Hotels, and Holiday Packages</p>
+  </header>
+  <nav>
+    <a href="#flights">Flights</a>
+    <a href="#hotels">Hotels</a>
+    <a href="#packages">Holiday Packages</a>
+  </nav>
+  <section class="search-form">
+    <h2>Search Your Trip</h2>
+    <input type="text" placeholder="From" />
+    <input type="text" placeholder="To" />
+    <input type="date" />
+    <select>
+      <option>Flights</option>
+      <option>Hotels</option>
+      <option>Packages</option>
+    </select>
+    <button>Search</button>
+  </section>
+  <section id="flights">
+    <h2>Available Flights</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Delhi to Mumbai</h3>
+        <p>₹3,500 | 2h 10m</p>
+        <button>Book Now</button>
+      </div>
+      <div class="card">
+        <h3>Bangalore to Goa</h3>
+        <p>₹2,800 | 1h 45m</p>
+        <button>Book Now</button>
+      </div>
+    </div>
+  </section>
+  <section id="hotels">
+    <h2>Top Hotels</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Leela Palace, Udaipur</h3>
+        <p>₹8,000 per night</p>
+        <button>Book Now</button>
+      </div>
+      <div class="card">
+        <h3>Marriott, Jaipur</h3>
+        <p>₹6,500 per night</p>
+        <button>Book Now</button>
+      </div>
+    </div>
+  </section>
+  <section id="packages">
+    <h2>Holiday Packages</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Manali 3N/4D</h3>
+        <p>₹12,000 | Hotel + Travel + Meals</p>
+        <button>Explore</button>
+      </div>
+      <div class="card">
+        <h3>Kerala Backwaters 4N/5D</h3>
+        <p>₹18,000 | Houseboat Stay + Travel</p>
+        <button>Explore</button>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>&copy; 2025 Travel Booking Portal | Designed for seamless travel planning</p>
+  </footer>
+</body>
+</html>
